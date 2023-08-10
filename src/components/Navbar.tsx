@@ -3,9 +3,12 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function NavBar() {
+
+  const navigate = useNavigate()
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" color="default">
@@ -13,8 +16,8 @@ function NavBar() {
           <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
             StarWars Shop
           </Typography>
-          <Button color="inherit">Início</Button>
-          <Button color="inherit">Sobre</Button>
+          <Button color="inherit" onClick={() => {navigate("/")}}>Início</Button>
+          <Button color="inherit" onClick={() => {navigate("/about")}}>Sobre</Button>
         </Toolbar>
       </AppBar>
     </Box>

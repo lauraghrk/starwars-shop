@@ -1,5 +1,7 @@
-import { Formik, Form, Field } from 'formik'
+import { Formik, Form } from 'formik'
 import Button from '@mui/material/Button';
+import { Container, TextField } from '@mui/material';
+import schema from '../schemas/schema';
 
 function CheckoutForm() {
 
@@ -8,28 +10,32 @@ function CheckoutForm() {
     }
 
     return (
-        <Formik initialValues={{}} onSubmit={onsubmit}>
+        <Formik initialValues={{}} validationSchema={schema} onSubmit={onsubmit}>
             {() => (
                 <Form>
-                    <div>
+                    <Container>
                         <h4>Informações pessoais</h4>
-                        <div>
-                            <label>Nome: </label>
-                            <Field name='name' type='text' />
-                        </div>
-                        <div>
-                            <label>E-mail: </label>
-                            <Field name='email' type='email' />
-                        </div>
-                        <div>
-                            <label>Telefone: </label>
-                            <Field name='email' type='email' />
-                        </div>
-                        <div>
-                            <label>CPF/CNPJ: </label>
-                            <Field name='email' type='email' />
-                        </div>
-                    </div>
+                        <TextField
+                            margin='dense'
+                            name='name'
+                            label='Nome'
+                        />
+                        <TextField
+                            margin='dense'
+                            name='email'
+                            label='E-mail'
+                        />
+                        <TextField
+                            margin='dense'
+                            name='phone'
+                            label='Telefone'
+                        />
+                        <TextField
+                            margin='dense'
+                            name='cpf-cnpj'
+                            label='CPF/CNPJ'
+                        />
+                    </Container>
                     <div>
                         <h4>Endereço</h4>
                     </div>
