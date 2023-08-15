@@ -16,8 +16,9 @@ function Checkout() {
 export default Checkout
 
 //Props veículo
-//Form endereço
-//regular expressions
-//tela sucesso/toast erro
-
 //estado metodo pagamento via mobx
+
+//Form endereço
+//botão submit
+
+//tela sucesso/toast erro

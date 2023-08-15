@@ -1,5 +1,6 @@
 import { useFormik } from 'formik'
-import { Box, Button, FormControlLabel, Radio, RadioGroup, TextField } from '@mui/material'
+import Button from '@mui/material/Button/Button'
+import { Box, FormControlLabel, Radio, RadioGroup, TextField } from '@mui/material'
 import schema from '../schemas/schema'
 import { useState } from 'react'
 
@@ -20,7 +21,7 @@ function CheckoutForm() {
             cvv: ''
         },
         validationSchema: schema,
-        onSubmit: (values) => {
+        onSubmit: () => {
             console.log('enviado')
         }
     })
@@ -28,6 +29,19 @@ function CheckoutForm() {
     const [paymentMethod, setPaymentMethod] = useState('')
     const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
       setPaymentMethod((ev.target as HTMLInputElement).value)
+    }
+
+    function onBlurCep(ev: React.FocusEvent<HTMLInputElement>) {
+        const value = ev.target.value
+        const cep = value?.replace(/[^0-9]/, '')
+
+        if (cep?.length !== 8) return
+
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+        .then((res) => res.json())
+        .then((data) => {
+            
+        })
     }
 
     return (
@@ -81,6 +95,7 @@ function CheckoutForm() {
                     value={formik.values.cep}
                     onChange={formik.handleChange}
                     error={formik.touched.cep && Boolean(formik.errors.cep)}
+                    onBlur={onBlurCep}
                 /> <br />
                 <TextField 
                     margin='dense'
