@@ -17,4 +17,7 @@ export default Checkout
 
 //Props veículo
 //Form endereço
-//Form validações
+//validar dados pagamento
+//tela sucesso/toast erro
+
+//estado metodo pagamento via mobx

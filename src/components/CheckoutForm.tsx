@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
-import Button from '@mui/material/Button';
-import { Box, Container, TextField } from '@mui/material';
-import schema from '../schemas/schema';
+import { Box, Button, FormControlLabel, Radio, RadioGroup, TextField } from '@mui/material'
+import schema from '../schemas/schema'
+import { useState } from 'react'
 
 function CheckoutForm() {
 
@@ -10,7 +10,14 @@ function CheckoutForm() {
             name: '',
             email: '',
             phone: '',
-            cpfcnpj: ''
+            cpfcnpj: '',
+            cep: '',
+
+            paymentMethod: '',
+            cardNumber: '',
+            val: '',
+            cardName: '',
+            cvv: ''
         },
         validationSchema: schema,
         onSubmit: (values) => {
@@ -18,6 +25,11 @@ function CheckoutForm() {
             console.log(values)
         }
     })
+
+    const [paymentMethod, setPaymentMethod] = useState('')
+    const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+      setPaymentMethod((ev.target as HTMLInputElement).value)
+    }
 
     return (
         <Box component="form" onSubmit={formik.handleSubmit}>
@@ -59,10 +71,77 @@ function CheckoutForm() {
             </div>
             <div>
                 <h4>Endereço</h4>
+                <TextField 
+                    margin='dense'
+                    name='cep'
+                    label='CEP'
+                    value={formik.values.cep}
+                    onChange={formik.handleChange}
+                    error={formik.touched.cep && Boolean(formik.errors.cep)}
+                /> <br />
+                <TextField 
+                    margin='dense'
+                    name='logradouro'
+                    label='Logradouro'
+                />
+                <TextField 
+                    margin='dense'
+                    name='number'
+                    label='Número'
+                />
+                <TextField 
+                    margin='dense'
+                    name='complement'
+                    label='Complemento'
+                />
+                <TextField 
+                    margin='dense'
+                    name='neighborhood'
+                    label='Bairro'
+                />
+                <TextField 
+                    margin='dense'
+                    name='city'
+                    label='Cidade'
+                />
+                <TextField 
+                    margin='dense'
+                    name='state'
+                    label='UF'
+                />
             </div>
             <div>
                 <h4>Pagamento</h4>
-
+                <RadioGroup row name='paymentMethod' onChange={handleChange} value={paymentMethod}>
+                    <FormControlLabel value='boleto' control={<Radio />} label='Boleto' />
+                    <FormControlLabel value='creditCard' control={<Radio />} label='Cartão de crédito' />
+                </RadioGroup>
+                {paymentMethod == 'creditCard' && (
+                    <div>
+                        <TextField
+                            margin='dense'
+                            name='cardNumber'
+                            label='Número do cartão'
+                        />
+                        <TextField
+                            margin='dense'
+                            name='val'
+                            label='Validade'
+                        />
+                        <TextField
+                            margin='dense'
+                            name='cardName'
+                            label='Nome impresso no cartão'
+                        />
+                        <TextField
+                            margin='dense'
+                            name='cvv'
+                            label='CVV'
+                            type='number'
+                        />
+                    </div>
+                )}
+                
             </div>
             <Button variant='contained' type="submit">Confirmar</Button>
         </Box>

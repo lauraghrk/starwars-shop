@@ -15,7 +15,7 @@ const Home = observer(() => {
     }, [])
 
     if (store.loading) {
-        return <div>Loading vehicles...</div>
+        return <div>Carregando veículos...</div>
     }
 
      return (
