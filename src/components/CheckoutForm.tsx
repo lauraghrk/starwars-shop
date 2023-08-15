@@ -22,7 +22,6 @@ function CheckoutForm() {
         validationSchema: schema,
         onSubmit: (values) => {
             console.log('enviado')
-            console.log(values)
         }
     })
 
@@ -42,6 +41,7 @@ function CheckoutForm() {
                     value={formik.values.name}
                     onChange={formik.handleChange}
                     error={formik.touched.name && Boolean(formik.errors.name)}
+                    helperText={formik.touched.name && formik.errors.name}
                 />
                 <TextField
                     margin='dense'
@@ -50,6 +50,7 @@ function CheckoutForm() {
                     value={formik.values.email}
                     onChange={formik.handleChange}
                     error={formik.touched.email && Boolean(formik.errors.email)}
+                    helperText={formik.touched.email && formik.errors.email}
                 />
                 <TextField
                     margin='dense'
@@ -58,6 +59,7 @@ function CheckoutForm() {
                     value={formik.values.phone}
                     onChange={formik.handleChange}
                     error={formik.touched.phone && Boolean(formik.errors.phone)}
+                    helperText={formik.touched.phone && formik.errors.phone}
                     placeholder='(00) 00000-0000'
                 />
                 <TextField
@@ -67,6 +69,7 @@ function CheckoutForm() {
                     value={formik.values.cpfcnpj}
                     onChange={formik.handleChange}
                     error={formik.touched.cpfcnpj && Boolean(formik.errors.cpfcnpj)}
+                    helperText={formik.touched.cpfcnpj && formik.errors.cpfcnpj}
                 />
             </div>
             <div>
@@ -122,26 +125,41 @@ function CheckoutForm() {
                             margin='dense'
                             name='cardNumber'
                             label='Número do cartão'
+                            value={formik.values.cardNumber}
+                            onChange={formik.handleChange}
+                            error={formik.touched.cardNumber && Boolean(formik.errors.cardNumber)}
+                            helperText={formik.touched.cardNumber && formik.errors.cardNumber}
                         />
                         <TextField
                             margin='dense'
                             name='val'
                             label='Validade'
+                            placeholder='MM/AA'
+                            value={formik.values.val}
+                            onChange={formik.handleChange}
+                            error={formik.touched.val && Boolean(formik.errors.val)}
+                            helperText={formik.touched.val && formik.errors.val}
                         />
                         <TextField
                             margin='dense'
                             name='cardName'
                             label='Nome impresso no cartão'
+                            value={formik.values.cardName}
+                            onChange={formik.handleChange}
+                            error={formik.touched.cardName && Boolean(formik.errors.cardName)}
+                            helperText={formik.touched.cardName && formik.errors.cardName}
                         />
                         <TextField
                             margin='dense'
                             name='cvv'
                             label='CVV'
-                            type='number'
+                            value={formik.values.cvv}
+                            onChange={formik.handleChange}
+                            error={formik.touched.cvv && Boolean(formik.errors.cvv)}
+                            helperText={formik.touched.cvv && formik.errors.cvv}
                         />
                     </div>
                 )}
-                
             </div>
             <Button variant='contained' type="submit">Confirmar</Button>
         </Box>
