@@ -1,4 +1,4 @@
-import { useFormik } from 'formik'
+/*import { useFormik, useFormikContext } from 'formik'
 import Button from '@mui/material/Button/Button'
 import { Box, FormControlLabel, Radio, RadioGroup, TextField } from '@mui/material'
 import schema from '../schemas/schema'
@@ -37,11 +37,16 @@ function CheckoutForm() {
 
         if (cep?.length !== 8) return
 
+        let data
         fetch(`https://viacep.com.br/ws/${cep}/json/`)
         .then((res) => res.json())
-        .then((data) => {
-            
-        })
+        .then((res) => {return data = res})
+        .then((data) => 
+            {setFieldValue('logradouro', data.logradouro)
+            setFieldValue('neighborhood', data.bairro)
+            setFieldValue('city', data.localidade)
+            setFieldValue('uf', data.uf)}
+        )
     }
 
     return (
@@ -95,7 +100,7 @@ function CheckoutForm() {
                     value={formik.values.cep}
                     onChange={formik.handleChange}
                     error={formik.touched.cep && Boolean(formik.errors.cep)}
-                    onBlur={onBlurCep}
+                    onBlur={(ev: React.FocusEvent<HTMLInputElement>) => onBlurCep(ev)}
                 /> <br />
                 <TextField 
                     margin='dense'
@@ -178,6 +183,58 @@ function CheckoutForm() {
             </div>
             <Button variant='contained' type="submit">Confirmar</Button>
         </Box>
+    )
+}
+
+export default CheckoutForm*/
+
+import { Field, Formik, FormikErrors } from 'formik';
+
+const CheckoutForm = () => {
+    function onBlurCep(ev: React.FocusEvent<HTMLInputElement>, setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => Promise<void | FormikErrors<{
+        cep: string;
+    }>>) {
+        const value = ev.target.value
+        const cep = value?.replace(/[^0-9]/, '')
+
+        if (cep?.length !== 8) return
+
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+            .then((res) => res.json())
+            .then((data) => {
+                setFieldValue('logradouro', data.logradouro)
+                setFieldValue('neighborhood', data.bairro)
+                setFieldValue('city', data.localidade)
+                setFieldValue('uf', data.uf)
+            })
+    }
+
+    return (
+        <div>
+            <h1>My Form</h1>
+            <Formik
+                initialValues={{ cep: '' }}
+                onSubmit={(values, actions) => {
+                    setTimeout(() => {
+                        alert(JSON.stringify(values, null, 2));
+                        actions.setSubmitting(false);
+                    }, 1000);
+                }}
+            >
+                {props => (
+                    <form onSubmit={props.handleSubmit}>
+                        <Field name="cep" type="text" onBlur={(ev: React.FocusEvent<HTMLInputElement>) => onBlurCep(ev, props.setFieldValue)}/>
+
+                        <Field name="logradouro" type="text" />
+                        <Field name="neighborhood" type="text" />
+                        <Field name="city" type="text" />
+                        <Field name="uf" type="text" />
+
+                        <button type="submit">Submit</button>
+                    </form>
+                )}
+            </Formik>
+        </div>
     )
 }
 
