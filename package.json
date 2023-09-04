@@ -9,9 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.14.4",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.4.0",
     "axios-hooks": "^4.0.0",

@@ -14,12 +14,3 @@ function Checkout() {
 }
 
 export default Checkout
-
-//Props veículo
-//estado metodo pagamento via mobx
-
-//botão submit
-
-//tela sucesso/toast erro
-
-// Migração MUI para bootstrap normal

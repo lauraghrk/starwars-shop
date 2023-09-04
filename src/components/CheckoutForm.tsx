@@ -45,9 +45,9 @@ const CheckoutForm = () => {
                 cvv: ''
             }}
             validationSchema={schema}
-            onSubmit={() => {
-                console.log('enviado')
-            }}
+            onSubmit={(values) => {
+                console.log(values)
+              }}
         >
             {props => (
                 <form onSubmit={props.handleSubmit}>
@@ -62,6 +62,7 @@ const CheckoutForm = () => {
                         <h4>Endereço</h4>
                         <Field name="cep" type="text" onBlur={(ev: React.FocusEvent<HTMLInputElement>) => onBlurCep(ev, props.setFieldValue)} />
                         <Field name="logradouro" type="text" />
+                        <Field name="number" type="text" />
                         <Field name="neighborhood" type="text" />
                         <Field name="city" type="text" />
                         <Field name="uf" type="text" />

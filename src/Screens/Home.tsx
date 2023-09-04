@@ -1,4 +1,3 @@
-import Container from '@mui/material/Container/Container'
 import { useEffect, useContext } from 'react'
 import { observer } from 'mobx-react-lite'
 import { IVehicle } from '../interfaces/IVehicle'
@@ -19,11 +18,11 @@ const Home = observer(() => {
     }
 
      return (
-        <Container maxWidth='md'>
+        <div>
             <div>
                 {vehicles.map((vehicle: IVehicle) => <ListItem key={vehicle.url} name={vehicle.name} url={vehicle.url} vehicle={vehicle} />)}
             </div>
-        </Container>
+        </div>
     )
 })
 
