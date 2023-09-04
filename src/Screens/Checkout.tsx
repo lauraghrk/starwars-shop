@@ -5,7 +5,7 @@ function Checkout() {
 
     const {name} = useParams()
     return (
-        <div>
+        <div className="container">
             <h2>Checkout</h2>
             <p><b>Item: </b>{name}</p>
             <CheckoutForm />

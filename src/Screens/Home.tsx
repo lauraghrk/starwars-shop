@@ -17,11 +17,9 @@ const Home = observer(() => {
         return <div>Carregando veículos...</div>
     }
 
-     return (
-        <div>
-            <div>
-                {vehicles.map((vehicle: IVehicle) => <ListItem key={vehicle.url} name={vehicle.name} url={vehicle.url} vehicle={vehicle} />)}
-            </div>
+    return (
+        <div className='container list-group' style={{marginTop: 30}}>
+            {vehicles.map((vehicle: IVehicle) => <ListItem key={vehicle.url} name={vehicle.name} url={vehicle.url} vehicle={vehicle} />)}
         </div>
     )
 })
