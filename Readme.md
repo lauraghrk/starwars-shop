@@ -7,5 +7,3 @@ To-do list:
 - validações
 
 - tela sucesso/toast erro
-
-- Migração MUI para bootstrap normal

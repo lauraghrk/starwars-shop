@@ -1,6 +1,7 @@
 import { Field, Formik, FormikErrors } from 'formik'
-import schema from '../schemas/schema'
 import { useState } from 'react'
+import schema from '../schemas/schema'
+import '../styles/styles.css'
 
 const CheckoutForm = () => {
     function onBlurCep(ev: React.FocusEvent<HTMLInputElement>, setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => Promise<void | FormikErrors<{
@@ -53,40 +54,53 @@ const CheckoutForm = () => {
                 <form onSubmit={props.handleSubmit}>
                     <div>
                         <h4>Informações pessoais</h4>
-                        <Field type='text' name='name' />
-                        <Field type='text' name='email' />
-                        <Field type='text' name='phone' />
-                        <Field type='text' name='cpfcnpj' />
+                        <label className="form-label">Nome</label>
+                        <Field type='text' name='name' className='form-control' />
+                        <label className="form-label">Email</label>
+                        <Field type='text' name='email' className='form-control' />
+                        <label className="form-label">Telefone</label>
+                        <Field type='text' name='phone' className='form-control' />
+                        <label className="form-label">CPF/CNPJ</label>
+                        <Field type='text' name='cpfcnpj' className='form-control' />
                     </div>
                     <div>
                         <h4>Endereço</h4>
-                        <Field name="cep" type="text" onBlur={(ev: React.FocusEvent<HTMLInputElement>) => onBlurCep(ev, props.setFieldValue)} />
-                        <Field name="logradouro" type="text" />
-                        <Field name="number" type="text" />
-                        <Field name="neighborhood" type="text" />
-                        <Field name="city" type="text" />
-                        <Field name="uf" type="text" />
+                        <label className="form-label">CEP</label>
+                        <Field name="cep" type="text" className='form-control' onBlur={(ev: React.FocusEvent<HTMLInputElement>) => onBlurCep(ev, props.setFieldValue)} />
+                        <label className="form-label">Logradouro</label>
+                        <Field name="logradouro" type="text" className='form-control' />
+                        <label className="form-label">Número</label>
+                        <Field name="number" type="text" className='form-control' />
+                        <label className="form-label">Bairro</label>
+                        <Field name="neighborhood" type="text" className='form-control' />
+                        <label className="form-label">Cidade</label>
+                        <Field name="city" type="text" className='form-control' />
+                        <label className="form-label">Estado</label>
+                        <Field name="uf" type="text" className='form-control' />
                     </div>
                     <div>
                         <h4>Pagamento</h4>
-                        <Field name="paymentMethod" as="select" onChange={handleChange} value={paymentMethod}>
+                        <Field name="paymentMethod" className="form-select" as="select" onChange={handleChange} value={paymentMethod}>
                             <option value="boleto">Boleto</option>
                             <option value="creditCard">Cartão de crédito</option>
                         </Field>
                         {paymentMethod == 'creditCard' && (
                             <div>
-                                <Field type='text' name='cardNumber' />
-                                <Field type='text' name='val' />
-                                <Field type='text' name='cardName' />
-                                <Field type='text' name='cvv' />
+                                <label className="form-label">Número do cartão</label>
+                                <Field type='text' name='cardNumber' className='form-control' />
+                                <label className="form-label">Validade (MM/AA)</label>
+                                <Field type='text' name='val' className='form-control' />
+                                <label className="form-label">Nome do titular</label>
+                                <Field type='text' name='cardName' className='form-control' />
+                                <label className="form-label">Código de segurança</label>
+                                <Field type='text' name='cvv' className='form-control' />
                             </div>
                         )}
                     </div>
-                    <button type="submit">Submit</button>
+                    <button type="submit" className='btn btn-secondary'>Confirmar</button>
                 </form>
             )}
         </Formik>
     )
 }
-
 export default CheckoutForm 

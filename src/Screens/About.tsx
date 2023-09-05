@@ -2,9 +2,9 @@
 function About() {
 
     return (
-        <div>
-            <h2>About</h2>
-            <p>This webpage is developed with React Typescript. It simulates a store for buying Star Wars vehicles available at the StarWars API.</p>
+        <div className="container" style={{marginTop: 30}}>
+            <h2>Sobre</h2>
+            <p>Esta página foi desenvolvida em React com Typescript. Ela simula uma loja de veículos do universo Star Wars. Os dados são da Star Wars API.</p>
         </div>
     )
 }
