@@ -1,5 +1,6 @@
 import { Field, Formik, FormikErrors } from 'formik'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import schema from '../schemas/schema'
 import '../styles/styles.css'
 
@@ -23,10 +24,11 @@ const CheckoutForm = () => {
     }
 
     const [paymentMethod, setPaymentMethod] = useState('')
-    const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    const handlePayChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
       setPaymentMethod((ev.target as HTMLInputElement).value)
     }
 
+    const navigate = useNavigate()
     return (
         <Formik
             initialValues={{
@@ -39,61 +41,65 @@ const CheckoutForm = () => {
                 neighborhood: '',
                 city: '',
                 uf: '',
-                paymentMethod: '',
+                paymentMethod: 'boleto',
                 cardNumber: '',
                 val: '',
                 cardName: '',
                 cvv: ''
             }}
             validationSchema={schema}
-            onSubmit={(values) => {
-                console.log(values)
+            onSubmit={() => {
+                console.log('enviado')
+                navigate("/success")
               }}
         >
             {props => (
                 <form onSubmit={props.handleSubmit}>
                     <div>
                         <h4>Informações pessoais</h4>
-                        <label className="form-label">Nome</label>
-                        <Field type='text' name='name' className='form-control' />
-                        <label className="form-label">Email</label>
-                        <Field type='text' name='email' className='form-control' />
-                        <label className="form-label">Telefone</label>
-                        <Field type='text' name='phone' className='form-control' />
-                        <label className="form-label">CPF/CNPJ</label>
-                        <Field type='text' name='cpfcnpj' className='form-control' />
+                        
+                        <label htmlFor='name' className="form-label">Nome</label>
+                        <Field type='text' name='name' id='name' className='form-control' />
+                        
+
+                        <label htmlFor='email' className="form-label">Email</label>
+                        <Field type='text' name='email' id='email' className='form-control' />
+                        <label htmlFor='phone' className="form-label">Telefone</label>
+                        <Field type='text' name='phone' id='phone' className='form-control' />
+                        <label htmlFor='cpfcnpj' className="form-label">CPF/CNPJ</label>
+                        <Field type='text' name='cpfcnpj' id='cpfcnpj' className='form-control' />
                     </div>
                     <div>
                         <h4>Endereço</h4>
-                        <label className="form-label">CEP</label>
-                        <Field name="cep" type="text" className='form-control' onBlur={(ev: React.FocusEvent<HTMLInputElement>) => onBlurCep(ev, props.setFieldValue)} />
-                        <label className="form-label">Logradouro</label>
-                        <Field name="logradouro" type="text" className='form-control' />
-                        <label className="form-label">Número</label>
-                        <Field name="number" type="text" className='form-control' />
-                        <label className="form-label">Bairro</label>
-                        <Field name="neighborhood" type="text" className='form-control' />
-                        <label className="form-label">Cidade</label>
-                        <Field name="city" type="text" className='form-control' />
-                        <label className="form-label">Estado</label>
-                        <Field name="uf" type="text" className='form-control' />
+                        <label htmlFor='cep' className="form-label">CEP</label>
+                        <Field name="cep" id='cep' type="text" className='form-control' onBlur={(ev: React.FocusEvent<HTMLInputElement>) => onBlurCep(ev, props.setFieldValue)} />
+                        <label htmlFor='logradouro' className="form-label">Logradouro</label>
+                        <Field name="logradouro" id='logradouro' type="text" className='form-control' />
+                        <label htmlFor='number' className="form-label">Número</label>
+                        <Field name="number" id='number' type="text" className='form-control' />
+                        <label htmlFor='neighborhood' className="form-label">Bairro</label>
+                        <Field name="neighborhood" id='neighborhood' type="text" className='form-control' />
+                        <label htmlFor='city' className="form-label">Cidade</label>
+                        <Field name="city" id='city' type="text" className='form-control' />
+                        <label htmlFor='uf' className="form-label">Estado</label>
+                        <Field name="uf" id='uf' type="text" className='form-control' />
                     </div>
                     <div>
                         <h4>Pagamento</h4>
-                        <Field name="paymentMethod" className="form-select" as="select" onChange={handleChange} value={paymentMethod}>
+                        <Field name="paymentMethod" className="form-select" as="select" onChange={handlePayChange} value={paymentMethod}>
                             <option value="boleto">Boleto</option>
                             <option value="creditCard">Cartão de crédito</option>
                         </Field>
                         {paymentMethod == 'creditCard' && (
                             <div>
-                                <label className="form-label">Número do cartão</label>
-                                <Field type='text' name='cardNumber' className='form-control' />
-                                <label className="form-label">Validade (MM/AA)</label>
-                                <Field type='text' name='val' className='form-control' />
-                                <label className="form-label">Nome do titular</label>
-                                <Field type='text' name='cardName' className='form-control' />
-                                <label className="form-label">Código de segurança</label>
-                                <Field type='text' name='cvv' className='form-control' />
+                                <label htmlFor='cardNumber' className="form-label">Número do cartão</label>
+                                <Field type='text' name='cardNumber' id='cardNumber' className='form-control' />
+                                <label htmlFor='val' className="form-label">Validade (MM/AA)</label>
+                                <Field type='text' name='val' id='val' className='form-control' />
+                                <label htmlFor='cardName' className="form-label">Nome do titular</label>
+                                <Field type='text' name='cardName' id='cardName' className='form-control' />
+                                <label htmlFor='cvv' className="form-label">Código de segurança</label>
+                                <Field type='text' name='cvv' id='cvv' className='form-control' />
                             </div>
                         )}
                     </div>
