@@ -8,36 +8,18 @@ const valRegExp = /^(0[1-9]|1[0-2])\/?([0-9]{2})$/
 export default object({
     name: string()
         .min(3, 'Mínimo 3 caracteres.')
-        .required('Obrigatório'),
+        .required('Nome deve ser preenchido.'),
     email: string()
         .email('E-mail inválido.')
-        .required('Obrigatório'),
+        .required('E-mail deve ser preenchido.'),
     phone: string()
         .matches(phoneRegExp, 'Telefone inválido')
-        .required('Obrigatório'),
+        .required('Telefone deve ser preenchido.'),
     cpfcnpj: string()
-        .matches(cpfcnpjRegExp, 'CPF/CNPJ inválido'),
-        //.required('Obrigatório'),
+        .matches(cpfcnpjRegExp, 'CPF/CNPJ inválido')
+        .required('CPF/CNPJ deve ser preenchido.'),
 
     cep: string()
-        .matches(cepRegExp)
-        .required('Informe um CEP.'),
-
-    paymentMethod: 
-        string()
-        .required('Selecione forma de pagamento.'),
-    cardNumber: 
-        string()
-        .min(16, 'Número inválido').
-        max(16, 'Número inválido'),
-    val:
-        string()
-        .matches(valRegExp, 'Data inválida.'),
-    cardName: 
-        string()
-        .min(3, 'Mínimo 3 caracteres.'),
-    cvv: 
-        string()
-        .min(3, 'Deve conter 3 dígitos.')
-        .max(3, 'Deve conter 3 dígitos.')
+        .matches(cepRegExp, 'CEP inválido.')
+        .required('Informe um CEP.')
 })
